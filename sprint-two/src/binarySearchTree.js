@@ -8,12 +8,6 @@ var BinarySearchTree = function(value) {
 
 BinarySearchTree.methods = {
   insert: function(value) {
-    // is there no left or right?
-    // return this.node.left = value if less, this.node.right = value if more
-    // is value less than searchTree's value?
-    // recursively call to the left
-    // is value greater than searchTree's value?
-    // recursively call to the right
     let traverse = function(tree) {
       if (value < tree.value && !tree.left) {
         tree.left = BinarySearchTree(value);
@@ -23,8 +17,6 @@ BinarySearchTree.methods = {
         return;
       }
       
-      // if its smaller than current and left doesn't exist but right exists
-      //set left to new thing 
       if (value < tree.value && tree.left) {
         traverse(tree.left);
       } else if (value > tree.value && tree.right) {
@@ -34,10 +26,6 @@ BinarySearchTree.methods = {
     traverse(this);
   }, 
   contains: function(value) {
-    // are we at the value right now?
-    // return value
-    // else if value is greater than tree value recurse right
-    // else left
     const traverse = function(tree) {
       if (value === tree.value) {
         return true;
@@ -54,10 +42,23 @@ BinarySearchTree.methods = {
     return traverse(this);
   },
   depthFirstLog: function(callBack) {
-
+    callBack = callBack || _.identity;
+    const traverse = function(tree) {
+      callBack(tree.value);
+      if (tree.left) {
+        traverse(tree.left);
+      }
+      if (tree.right) {
+        traverse(tree.right);
+      }
+    };
+    traverse(this);
   }
 };
 
 /*
  * Complexity: What is the time complexity of the above functions?
  */
+//insert: O(log(n))
+//contains: O(log(n))
+//depthFirstLog: O(n)
