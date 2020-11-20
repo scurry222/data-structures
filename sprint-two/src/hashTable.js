@@ -10,9 +10,7 @@ HashTable.prototype.insert = function(k, v) {
   if (this._storage.get(index)) {
     this._storage.get(index)[k] = v;
   } else {
-    const pair = {};
-    pair[k] = v;
-    this._storage.set(index, pair);
+    this._storage.set(index, {[k]: v});
   }
 };
 
