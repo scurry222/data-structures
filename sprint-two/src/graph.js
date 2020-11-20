@@ -16,7 +16,6 @@ Graph.prototype.contains = function(node) {
 
 // Removes a node from the graph.
 Graph.prototype.removeNode = function(node) {
-
   if (this.nodes.includes(node)) {
     this.nodes.splice(this.nodes.indexOf(node), 1);
     for (let i = 0; i < this.edges.length; i++) {
@@ -24,13 +23,7 @@ Graph.prototype.removeNode = function(node) {
         this.edges.splice(i, 1);
       }
     }
-
   }
-  // remove node from nodes array
-
-  // loop through edges arrays
-  // if node is found, splice node from array
-
 };
 
 // Returns a boolean indicating whether two specified nodes are connected.  Pass in the values contained in each of the two nodes.
@@ -76,4 +69,10 @@ Graph.prototype.forEachNode = function(cb) {
  * Complexity: What is the time complexity of the above functions?
  */
 
-
+// addNode: O(1)
+// contains: O(n)
+// removeNode: O(n^2)
+// hasEdge: O(n)
+// addEdge: O(n)
+// removeEdge: O(n)
+// forEachNode: O(n)
