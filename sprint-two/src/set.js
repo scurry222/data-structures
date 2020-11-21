@@ -9,7 +9,7 @@ var setPrototype = {};
 
 setPrototype.add = function(item) {
   if (!this.contains(item)) {
-    this._storage[JSON.stringify(item)] = item;
+    this._storage[JSON.stringify(item)] = JSON.stringify(item);
     this.size += 1;
   }
 };

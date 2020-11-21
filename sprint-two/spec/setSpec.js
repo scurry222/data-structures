@@ -39,4 +39,17 @@ describe('set', function() {
     expect(set.contains('Steven Seagal')).to.equal(true);
     expect(set.contains('Mel Gibson')).to.equal(false);
   });
+
+  it('should add objects to a set', function() {
+    let bigSteve = {'Steven': 'Seagal'};
+    set.add(bigSteve);
+    expect(set.contains(bigSteve)).to.equal(true);
+  });
+
+  it('should not allow modifications to existing elements in the set', function() {
+    let arr = [];
+    set.add(arr);
+    arr.push(1);
+    expect(set.contains([])).to.equal(true);
+  });
 });
