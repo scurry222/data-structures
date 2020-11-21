@@ -5,10 +5,17 @@ describe('set', function() {
     set = Set();
   });
 
+
   it('should have methods named "add", "contains", and "remove"', function() {
     expect(set.add).to.be.a('function');
     expect(set.contains).to.be.a('function');
     expect(set.remove).to.be.a('function');
+  });
+
+  it('should not add values that already exist in the set', function() {
+    set.add('Steven Seagal');
+    set.add('Steven Seagal');
+    expect(set.size).to.equal(1);
   });
 
   it('should add values to a set', function() {
@@ -24,4 +31,12 @@ describe('set', function() {
     expect(set.contains('Mel Gibson')).to.equal(false);
   });
 
+  it('should remove only one value when theres multiple items in the set', function() {
+    set.add('Mel Gibson');
+    set.add('Steven Seagal');
+    set.remove('Mel Gibson');
+
+    expect(set.contains('Steven Seagal')).to.equal(true);
+    expect(set.contains('Mel Gibson')).to.equal(false);
+  });
 });
