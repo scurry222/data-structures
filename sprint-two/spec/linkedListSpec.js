@@ -58,4 +58,39 @@ describe('linkedList', function() {
     expect(linkedList.head).to.equal(null);
   });
   // add more tests here to test the functionality of linkedList
+
+  it('should add to head', function() {
+    linkedList.addToHead(4);
+    expect(linkedList.head.value).to.equal(4);
+    linkedList.addToHead(5);
+    expect(linkedList.head.value).to.equal(5);
+  });
+
+  it('should remove the tail correctly for a linked list of length 1', function() {
+    linkedList.addToHead(69);
+    linkedList.removeTail();
+    expect(linkedList.tail).to.equal(null);
+  });
+
+  it('should remove the tail correctly for a linked list of length 2', function() {
+    linkedList.addToHead(69);
+    linkedList.addToHead(420);
+    linkedList.removeTail();
+    expect(linkedList.contains(420)).to.equal(true);
+    expect(linkedList.contains(69)).to.equal(false);
+  });
+
+  it('should remove the head correctly for a linked list of length 1', function() {
+    linkedList.addToHead(69);
+    linkedList.removeHead();
+    expect(linkedList.head).to.equal(null);
+  });
+
+  it('should remove the head correctly for a linked list of length 2', function() {
+    linkedList.addToHead(69);
+    linkedList.addToHead(420);
+    linkedList.removeHead();
+    expect(linkedList.contains(420)).to.equal(false);
+    expect(linkedList.contains(69)).to.equal(true);
+  });
 });
