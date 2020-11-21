@@ -3,16 +3,17 @@ var Tree = function(value) {
   _.extend(newTree, treeMethods);
   newTree.value = value;
   // your code here
-  newTree.children = []; // fix me
-
+  newTree.children = [];
+  newTree.parent = null;
   return newTree;
 };
 
 var treeMethods = {};
 
 treeMethods.addChild = function(value) {
-  let tree = Tree(value);
-  this.children.push(tree);
+  let child = Tree(value);
+  child.parent = this;
+  this.children.push(child);
 };
 
 treeMethods.contains = function(target) {
@@ -24,7 +25,21 @@ treeMethods.contains = function(target) {
     }
     return previous || target === tree.value;
   };
-  return traverse(this);  
+  return traverse(this);
+};
+
+treeMethods.removeFromParent = function() {
+  // this's parent we wanna remove this tree from children
+  this.parent.children.slice(this.parent.children.indexOf(this), 1);
+  // on this we want parent to be null
+  this.parent = null;
+};
+
+treeMethods.traverse = function(tree, callback) {
+  callback(tree.value);
+  for (let child of tree.children) {
+    this.traverse(child, callback);
+  }
 };
 
 /*

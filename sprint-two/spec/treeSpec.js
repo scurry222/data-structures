@@ -49,4 +49,33 @@ describe('tree', function() {
     tree.children[1].addChild(8);
     expect(tree.contains(10)).to.equal(false);
   });
+
+  it('should correctly access the parent if parent exists', function() {
+    tree.addChild(5);
+    tree.addChild(6);
+    tree.children[0].addChild(7);
+    tree.children[1].addChild(8);
+    expect(tree.children[1].children[0].parent.value).to.equal(6);
+  });
+
+  it('parent should be null if at root node', function() {
+    expect(tree.parent).to.equal(null);
+  });
+
+  it('should multiply all values in the tree by two', function() {
+    let doubled = [];
+    const multByTwo = function(val) { doubled.push(val *= 2); };
+
+    tree.value = 1;
+    tree.addChild(1);
+    tree.addChild(2);
+    tree.addChild(3);
+    tree.children[0].addChild(4);
+    tree.children[1].addChild(5);
+    tree.children[2].addChild(6);
+
+    tree.traverse(tree, multByTwo);
+
+    expect(doubled).to.eql([2, 2, 8, 4, 10, 6, 12]);
+  });
 });
