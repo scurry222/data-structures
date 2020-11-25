@@ -16,7 +16,6 @@ BinarySearchTree.methods = {
         tree.right = BinarySearchTree(value);
         return;
       }
-      
       if (value < tree.value && tree.left) {
         traverse(tree.left);
       } else if (value > tree.value && tree.right) {
@@ -53,9 +52,28 @@ BinarySearchTree.methods = {
       }
     };
     traverse(this);
+  },
+  breadthFirstLog: function(callBack) {
+    callBack = callBack || _.identity;
+    const queue = [];
+    const visited = [];
+    queue.push(this);
+    while (queue.length) {
+      const node = queue.shift();
+      visited.push(node.value);
+
+      if (node.left) {
+        queue.push(node.left);
+      }
+      if (node.right) {
+        queue.push(node.right);
+      }
+    }
+    for (let i = 0; i < visited.length; i++) {
+      callBack(visited[i]);
+    }
   }
 };
-
 /*
  * Complexity: What is the time complexity of the above functions?
  */
