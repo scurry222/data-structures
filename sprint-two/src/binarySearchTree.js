@@ -72,7 +72,42 @@ BinarySearchTree.methods = {
       traverse();
     };
     traverse();
-  }
+  },
+  depthFirstInOrder: function() {
+    const data = [];
+    const traverse = function(node) {
+      if (node.left) {
+        traverse(node.left);
+      }
+      data.push(node.value);
+      if (node.right) {
+        traverse(node.right);
+      }
+    };
+    traverse(this);
+    return data;
+  },
+  buildBSTFromInOrder: function() {
+    const ordered = this.depthFirstInOrder();
+    const half = Math.floor(ordered.length / 2);
+    const balanced = new BinarySearchTree(ordered[half]);
+    const buildBST = function(arr) {
+      if (arr.length === 1) {
+        balanced.insert(arr[0]);
+        return;
+      } else if (arr.length === 2) {
+        balanced.insert(arr[1]);
+        balanced.insert(arr[0]);
+        return;
+      } else {
+        const midPoint = Math.floor(arr.length / 2);
+        buildBST(arr.splice(0, midPoint));
+        buildBST(arr.splice(midPoint - 1, arr.length));
+      }
+    };
+    buildBST(ordered);
+    return balanced;
+  } 
 };
 /*
  * Complexity: What is the time complexity of the above functions?

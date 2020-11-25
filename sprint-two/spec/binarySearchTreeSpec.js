@@ -58,4 +58,27 @@ describe('binarySearchTree', function() {
     binarySearchTree.breadthFirstLog(func);
     expect(array).to.eql([5, 2, 7, 3]);
   });
+
+  it('should create an ordered array from the binary tree', function() {
+    binarySearchTree.insert(2);
+    binarySearchTree.insert(3);
+    binarySearchTree.insert(7);
+    const ordered = binarySearchTree.depthFirstInOrder();
+    expect(ordered).to.eql([2, 3, 5, 7]);
+  });
+
+  it('should create a balanced array from an unbalanced one', function() {
+    var array = [];
+    var func = function(value) { array.push(value); };
+    binarySearchTree.insert(10);
+    binarySearchTree.insert(8);
+    binarySearchTree.insert(7);
+    binarySearchTree.insert(6);
+    binarySearchTree.insert(5);
+    const balanced = binarySearchTree.buildBSTFromInOrder();
+    balanced.breadthFirstLog(func);
+    expect(array).to.eql([7, 6, 10, 5, 8]);
+  });
+
+
 });
