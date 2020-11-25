@@ -56,22 +56,7 @@ BinarySearchTree.methods = {
   breadthFirstLog: function(callBack) {
     callBack = callBack || _.identity;
     const queue = [];
-    const visited = [];
     queue.push(this);
-    // while (queue.length) {
-    //   const node = queue.shift();
-    //   visited.push(node.value);
-
-    //   if (node.left) {
-    //     queue.push(node.left);
-    //   }
-    //   if (node.right) {
-    //     queue.push(node.right);
-    //   }
-    // }
-    // for (let i = 0; i < visited.length; i++) {
-    //   callBack(visited[i]);
-    // }
     const traverse = function() {
       if (!queue.length) {
         return;
